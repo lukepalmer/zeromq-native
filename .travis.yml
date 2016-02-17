@@ -44,14 +44,17 @@ script:
  - ./configure
  - make
  - sudo make install
- - cd ../..
+ - cd
+ - cp /usr/local/lib/libjzmq.so .
+ - cp /usr/local/lib/libzmq.so .
+ - cp /usr/local/lib/libsodium.so .
 addons:
   artifacts:
     debug: true
     paths:
-     - /usr/local/lib/libjzmq.so
-     - /usr/local/lib/libzmq.so
-     - /usr/local/lib/libsodium.so
+     - libjzmq.so
+     - libzmq.so
+     - libsodium.so
     target_paths: ${ZMQ_VERSION}/${ARCH}
     permissions: public-read
 
