@@ -21,29 +21,29 @@ install:
 script:
  - cd libsodium
  - ./autogen.sh
- - ./configure --prefix=$HOME/$ARCH
+ - ./configure --prefix=${HOME}/${ARCH}
  - make
  - make install
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - ./configure --with-libsodium --prefix=$HOME/$ARCH
- - LDFLAGS="-L$HOME/$ARCH/lib -lsodium" make
+ - ./configure --with-libsodium --prefix=${HOME}/${ARCH}
+ - CPPFLAGS="-I${HOME}/${ARCH}/include" LDFLAGS="-L${HOME}/${ARCH}/lib -lsodium" make
  - make install
  - ldconfig
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - ./configure --prefix=$HOME/$ARCH
- - LDFLAGS="-L$HOME/$ARCH/lib" make
+ - ./configure --prefix=${HOME}/${ARCH}
+ - CPPFLAGS="-I${HOME}/${ARCH}/include" LDFLAGS="-L${HOME}/${ARCH}/lib" make
  - make install
  - cd ../..
 addons:
   artifacts:
     debug: true
     paths:
-     - $HOME/$ARCH/libjzmq.so
-     - $HOME/$ARCH/libzmq.so
-     - $HOME/$ARCH/libsodium.so
-    target_paths: $ZMQ_VERSION/$ARCH
+     - ${HOME}/${ARCH}/libjzmq.so
+     - ${HOME}/${ARCH}/libzmq.so
+     - ${HOME}/${ARCH}/libsodium.so
+    target_paths: ${ZMQ_VERSION}/${ARCH}
 
