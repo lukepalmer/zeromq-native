@@ -24,21 +24,18 @@ script:
  - cd libsodium
  - ./autogen.sh
  - ./configure --prefix=${HOME}/${ARCH}
- - make
- - make install
+ - make clean install
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - LDFLAGS="$LDFLAGS -lsodium" sodium_CFLAGS=${HOME}/${ARCH}/include ./configure --with-libsodium --prefix=${HOME}/${ARCH}
- - make
- - make install
+ - LDFLAGS="$LDFLAGS -lsodium" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/libs ./configure --with-libsodium --prefix=${HOME}/${ARCH}
+ - make clean install
  - ldconfig
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
  - ./configure --prefix=${HOME}/${ARCH}
- - make
- - make install
+ - make clean install
  - cd ../..
 addons:
   artifacts:
