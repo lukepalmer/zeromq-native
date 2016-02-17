@@ -34,3 +34,5 @@ script:
 addons:
   artifacts:
     debug: true
+    paths:
+     - $(find . -type f -name \*.so\* | tr "\n" ":")
