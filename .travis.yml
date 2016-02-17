@@ -35,4 +35,4 @@ addons:
   artifacts:
     debug: true
     paths:
-     - $(find . -type f -name \*.so\* | tr "\n" ":")
+     - $(find . -name \*.so | tr "\n" ":")
