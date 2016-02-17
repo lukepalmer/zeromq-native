@@ -17,6 +17,7 @@ install:
  - git clone https://github.com/zeromq/libzmq.git
  - git clone https://github.com/zeromq/jzmq.git
  - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
+ - tar xzvf ${ZMQ_VERSION}.tar.gz
 script:
  - cd libsodium
  - ./autogen.sh
@@ -24,7 +25,7 @@ script:
  - make
  - make install
  - cd ..
- - cd libzmq
+ - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
  - ./configure --with-libsodium --prefix=$HOME/$ARCH
  - LDFLAGS="-L$HOME/$ARCH/lib -lsodium" make
