@@ -11,7 +11,7 @@ matrix:
   fast_finish: true
 before_install:
  - sudo apt-get update -y
- - sudo apt-get install libpgm-dev -y
+ - sudo apt-get install libpgm-dev gcc-multilib -y
 install:
  - git clone -b stable git://github.com/jedisct1/libsodium.git
  - git clone https://github.com/zeromq/libzmq.git
@@ -19,6 +19,8 @@ install:
  - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
  - tar xzvf zeromq-${ZMQ_VERSION}.tar.gz
 script:
+ - export CPPFLAGS="-I${HOME}/${ARCH}/include"
+ - export LDFLAGS="-L${HOME}/${ARCH}/lib"
  - cd libsodium
  - ./autogen.sh
  - ./configure --prefix=${HOME}/${ARCH}
@@ -27,15 +29,15 @@ script:
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - ./configure --with-libsodium --prefix=${HOME}/${ARCH}
- - CPPFLAGS="-I${HOME}/${ARCH}/include" LDFLAGS="-L${HOME}/${ARCH}/lib -lsodium" make
+ - LDFLAGS="$LDFLAGS -lsodium" ./configure --with-libsodium --prefix=${HOME}/${ARCH}
+ - make
  - make install
  - ldconfig
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
  - ./configure --prefix=${HOME}/${ARCH}
- - CPPFLAGS="-I${HOME}/${ARCH}/include" LDFLAGS="-L${HOME}/${ARCH}/lib" make
+ - make
  - make install
  - cd ../..
 addons:
