@@ -29,7 +29,7 @@ script:
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - LDFLAGS="$LDFLAGS -lsodium" ./configure --with-libsodium --prefix=${HOME}/${ARCH}
+ - LDFLAGS="$LDFLAGS -lsodium" sodium_CFLAGS=${HOME}/${ARCH}/include ./configure --with-libsodium --prefix=${HOME}/${ARCH}
  - make
  - make install
  - ldconfig
