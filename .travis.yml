@@ -46,6 +46,7 @@ script:
  - sudo make install
  - cd /usr/local/lib
  - zip ${HOME}/zeromq-native.zip libjzmq.so libzmq.so libsodium.so
+ - cd
 addons:
   artifacts:
     debug: true
