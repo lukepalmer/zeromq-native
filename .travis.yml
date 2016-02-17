@@ -1,6 +1,10 @@
 env:
   matrix:
     - ARCH=x86_64
+    - ARCH=i686
+      CFLAGS=-m32
+      CXXFLAGS=-m32
+      LDFLAGS=-m32
   global:
     - ZMQ_VERSION=4.1.4
 
@@ -19,8 +23,8 @@ install:
  - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
  - tar xzvf zeromq-${ZMQ_VERSION}.tar.gz
 script:
- - export CPPFLAGS="-I${HOME}/${ARCH}/include"
- - export LDFLAGS="-L${HOME}/${ARCH}/lib"
+ - export CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include"
+ - export LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib"
  - cd libsodium
  - ./autogen.sh
  - ./configure --prefix=${HOME}/${ARCH}
@@ -41,8 +45,8 @@ addons:
   artifacts:
     debug: true
     paths:
-     - ${HOME}/${ARCH}/libjzmq.so
-     - ${HOME}/${ARCH}/libzmq.so
-     - ${HOME}/${ARCH}/libsodium.so
+     - ${HOME}/${ARCH}/libjzmq.so*
+     - ${HOME}/${ARCH}/libzmq.so*
+     - ${HOME}/${ARCH}/libsodium.so*
     target_paths: ${ZMQ_VERSION}/${ARCH}
 
