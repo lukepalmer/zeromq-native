@@ -1,3 +1,9 @@
+env:
+  matrix:
+    - ARCH=linux_64
+  global:
+    - ZMQ_VERSION=4.1.4
+
 language: cpp
 sudo: required
 dist: trusty
@@ -10,31 +16,33 @@ install:
  - git clone -b stable git://github.com/jedisct1/libsodium.git
  - git clone https://github.com/zeromq/libzmq.git
  - git clone https://github.com/zeromq/jzmq.git
+ - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
 script:
  - cd libsodium
  - ./autogen.sh
- - ./configure
+ - ./configure --prefix=$HOME/$ARCH
  - make
- - sudo make install
- - sudo ldconfig
+ - make install
  - cd ..
  - cd libzmq
  - ./autogen.sh
- - ./configure --with-libsodium
- - LDFLAGS=-lsodium make
- - sudo make install
- - sudo ldconfig
+ - ./configure --with-libsodium --prefix=$HOME/$ARCH
+ - LDFLAGS="-L$HOME/$ARCH/lib -lsodium" make
+ - make install
+ - ldconfig
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - ./configure
- - make
- - sudo make install
+ - ./configure --prefix=$HOME/$ARCH
+ - LDFLAGS="-L$HOME/$ARCH/lib" make
+ - make install
  - cd ../..
 addons:
   artifacts:
     debug: true
     paths:
-     - /usr/local/lib/libjzmq.so
-     - /usr/local/lib/libzmq.so
-     - /usr/local/lib/libsodium.so
+     - $HOME/$ARCH/libjzmq.so
+     - $HOME/$ARCH/libzmq.so
+     - $HOME/$ARCH/libsodium.so
+    target_paths: $ZMQ_VERSION/$ARCH
+
