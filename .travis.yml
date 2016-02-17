@@ -4,6 +4,7 @@ dist: trusty
 matrix:
   fast_finish: true
 before_install:
+ - sudo apt-get update -y
  - sudo apt-get install libpgm-dev -y
 install:
  - git clone -b stable git://github.com/jedisct1/libsodium.git
