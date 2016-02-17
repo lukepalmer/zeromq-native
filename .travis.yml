@@ -53,4 +53,5 @@ addons:
      - /usr/local/lib/libzmq.so
      - /usr/local/lib/libsodium.so
     target_paths: ${ZMQ_VERSION}/${ARCH}
+    permissions: public-read
 
