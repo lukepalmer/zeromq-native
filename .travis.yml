@@ -1,0 +1,35 @@
+language: cpp
+matrix:
+  fast_finish: true
+before_install:
+ - sudo apt-get update -y
+ - sudo apt-get install libpgm-dev make build-essential pkg-config libtool automake -y
+ - git clone -b stable git://github.com/jedisct1/libsodium.git
+ - git clone https://github.com/zeromq/libzmq.git
+ - git clone https://github.com/zeromq/jzmq.git
+install:
+ - cd libsodium
+ - ./autogen.sh
+ - ./configure
+ - make
+ - sudo make install
+ - sudo ldconfig
+ - cd ..
+ - cd libzmq
+ - ./autogen.sh
+ - ./configure --with-libsodium
+ - make
+ - sudo make install
+ - sudo ldconfig
+ - cd ..
+ - cd jzmq/jzmq-jni
+ - ./autogen.sh
+ - ./configure
+ - make
+ - sudo make install
+ - cd ..
+ addons:
+  artifacts:
+    debug: true
+
+
