@@ -1,4 +1,5 @@
 language: cpp
+sudo: required
 matrix:
   fast_finish: true
 before_install:
@@ -28,8 +29,5 @@ install:
  - make
  - sudo make install
  - cd ..
- addons:
-  artifacts:
-    debug: true
-
-
+addons:
+  artifacts: true
