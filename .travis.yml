@@ -4,12 +4,12 @@ dist: trusty
 matrix:
   fast_finish: true
 before_install:
- - sudo apt-get update -y
- - sudo apt-get install libpgm-dev make build-essential pkg-config libtool automake -y
+ - sudo apt-get install libpgm-dev -y
+install:
  - git clone -b stable git://github.com/jedisct1/libsodium.git
  - git clone https://github.com/zeromq/libzmq.git
  - git clone https://github.com/zeromq/jzmq.git
-install:
+script:
  - cd libsodium
  - ./autogen.sh
  - ./configure
@@ -31,4 +31,5 @@ install:
  - sudo make install
  - cd ..
 addons:
-  artifacts: true
+  artifacts:
+    debug: true
