@@ -21,7 +21,7 @@ script:
  - cd libzmq
  - ./autogen.sh
  - ./configure --with-libsodium
- - make
+ - LDFLAGS=-lsodium make
  - sudo make install
  - sudo ldconfig
  - cd ..
@@ -30,9 +30,11 @@ script:
  - ./configure
  - make
  - sudo make install
- - cd ..
+ - cd ../..
 addons:
   artifacts:
     debug: true
     paths:
-     - $(find . -name \*.so | tr "\n" ":")
+     - /usr/local/lib/libjzmq.so
+     - /usr/local/lib/libzmq.so
+     - /usr/local/lib/libsodium.so
