@@ -7,7 +7,6 @@ env:
       LDFLAGS=-m32
   global:
     - ZMQ_VERSION=4.1.4
-
 language: cpp
 sudo: required
 dist: trusty
@@ -23,30 +22,32 @@ install:
  - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
  - tar xzvf zeromq-${ZMQ_VERSION}.tar.gz
 script:
- - export CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include"
- - export LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib"
  - cd libsodium
  - ./autogen.sh
- - ./configure --prefix=${HOME}/${ARCH}
- - make clean install
+ - ./configure
+ - make
+ - sudo make install
+ - sudo ldconfig
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - LDFLAGS="$LDFLAGS -lsodium" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/libs ./configure --with-libsodium --prefix=${HOME}/${ARCH}
- - make clean install
- - ldconfig
+ - LDFLAGS="$LDFLAGS -lsodium" ./configure --with-libsodium
+ - make
+ - sudo make install
+ - sudo ldconfig
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - ./configure --prefix=${HOME}/${ARCH}
- - make clean install
+ - ./configure
+ - make
+ - sudo make install
  - cd ../..
 addons:
   artifacts:
     debug: true
     paths:
-     - ${HOME}/${ARCH}/libjzmq.so*
-     - ${HOME}/${ARCH}/libzmq.so*
-     - ${HOME}/${ARCH}/libsodium.so*
+     - /usr/local/lib/libjzmq.so
+     - /usr/local/lib/libzmq.so
+     - /usr/local/lib/libsodium.so
     target_paths: ${ZMQ_VERSION}/${ARCH}
 
