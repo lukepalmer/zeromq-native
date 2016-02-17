@@ -1,6 +1,9 @@
 env:
   matrix:
     - ARCH=x86_64
+      CFLAGS=-m64
+      CXXFLAGS=-m64
+      LDFLAGS=-m64
     - ARCH=i686
       CFLAGS=-m32
       CXXFLAGS=-m32
@@ -14,7 +17,7 @@ matrix:
   fast_finish: true
 before_install:
  - sudo apt-get update -y
- - sudo apt-get install libpgm-dev gcc-multilib -y
+ - sudo apt-get install libpgm-dev gcc-multilib g++-multilib mingw32 mingw-w64 -y
 install:
  - git clone -b stable git://github.com/jedisct1/libsodium.git
  - git clone https://github.com/zeromq/libzmq.git
