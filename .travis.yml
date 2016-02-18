@@ -6,7 +6,7 @@ env:
       CPPFLAGS=-m32
       CXXFLAGS=-m32
       LDFLAGS=-m32
-      HOSTARG=--host=i686-pc-linux-gnu
+      HOSTBUILD="--host=i686-pc-linux-gnu --build=x86_64-pc-linux-gnu"
   global:
     - ZMQ_VERSION=4.1.4
 language: cpp
@@ -26,17 +26,17 @@ install:
 script:
  - cd libsodium
  - ./autogen.sh
- - ./configure --prefix=${HOME}/${ARCH} $HOSTARG
+ - ./configure --prefix=${HOME}/${ARCH} $HOSTBUILD
  - make install
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - CPPFLAGS=-I${HOME}/${ARCH}/include LDFLAGS="-L${HOME}/${ARCH}/lib -Wl,-Bstatic,-lsodium -Wl,-Bdynamic" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/lib ./configure --with-libsodium --prefix=${HOME}/${ARCH} CXXFLAGS="-fPIC" $HOSTARG
+ - CXXFLAGS="$CXXFLAGS -fPIC" CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include" LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib -Wl,-Bstatic,-lsodium -Wl,-Bdynamic" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/lib ./configure --with-libsodium --prefix=${HOME}/${ARCH} $HOSTBUILD
  - make install
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - CPPFLAGS=-I${HOME}/${ARCH}/include LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib -lrt -lpthread" ./configure --prefix=${HOME}/${ARCH} --enable-self-contained
+ - CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include" LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib -lrt -lpthread" ./configure --prefix=${HOME}/${ARCH} --enable-self-contained
  - make install
  - cd
  - cp ${HOME}/${ARCH}/lib/libjzmq.so.0.0.0 libjzmq.so
