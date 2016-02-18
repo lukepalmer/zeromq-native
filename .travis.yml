@@ -34,24 +34,23 @@ script:
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - LDFLAGS="$LDFLAGS -lsodium" ./configure --with-libsodium
+ - ./configure --with-libsodium LDFLAGS="$LDFLAGS -Wl,Bstatic,-lsodium -Wl,-Bdynamic" CXXFLAGS="$CXXFLAGS -fPIC"
  - make
  - sudo make install
  - sudo ldconfig
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - ./configure
+ - ./configure --enable-self-contained LDFLAGS="$LDFLAGS -lrt -lpthread"
  - make
  - sudo make install
- - cd /usr/local/lib
- - zip ${HOME}/zeromq-native.zip libjzmq.so libzmq.so libsodium.so
  - cd
+ - cp /usr/local/lib/libjzmq.so.0.0.0 libjzmq.so
 addons:
   artifacts:
     debug: true
     paths:
-     - zeromq-native.zip
+     - libjzmq.so
     target_paths: ${ZMQ_VERSION}/${ARCH}
     permissions: public-read
 
