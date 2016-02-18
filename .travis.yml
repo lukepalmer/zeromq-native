@@ -24,25 +24,20 @@ install:
 script:
  - cd libsodium
  - ./autogen.sh
- - ./configure
- - make
- - sudo make install
- - sudo ldconfig
+ - ./configure --prefix=${HOME}/${ARCH}
+ - make install
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - ./configure --with-libsodium LDFLAGS="$LDFLAGS -Wl,-Bstatic,-lsodium -Wl,-Bdynamic" CXXFLAGS="$CXXFLAGS -fPIC"
- - make
- - sudo make install
- - sudo ldconfig
+ - CPPFLAGS=-I${HOME}/${ARCH}/include LDFLAGS="-L${HOME}/${ARCH}/lib -Wl,-Bstatic,-lsodium -Wl,-Bdynamic" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/lib ./configure --with-libsodium --prefix=${HOME}/${ARCH} CXXFLAGS="-fPIC"
+ - make install
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - LDFLAGS="$LDFLAGS -lrt -lpthread" ./configure --enable-self-contained
- - make
- - sudo make install
+ - CPPFLAGS=-I${HOME}/${ARCH}/include LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib -lrt -lpthread" ./configure --prefix=${HOME}/${ARCH} --enable-self-contained
+ - make install
  - cd
- - cp /usr/local/lib/libjzmq.so.0.0.0 libjzmq.so
+ - cp ${HOME}/${ARCH}/lib/libjzmq.so.0.0.0 libjzmq.so
 addons:
   artifacts:
     debug: true
@@ -50,4 +45,3 @@ addons:
      - libjzmq.so
     target_paths: ${ZMQ_VERSION}/${ARCH}
     permissions: public-read
-
