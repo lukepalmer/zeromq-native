@@ -3,8 +3,10 @@ env:
     - ARCH=x86_64
     - ARCH=i686
       CFLAGS=-m32
+      CPPFLAGS=-m32
       CXXFLAGS=-m32
       LDFLAGS=-m32
+      HOSTARG=--host=i686-pc-linux-gnu
   global:
     - ZMQ_VERSION=4.1.4
 language: cpp
@@ -24,12 +26,12 @@ install:
 script:
  - cd libsodium
  - ./autogen.sh
- - ./configure --prefix=${HOME}/${ARCH}
+ - ./configure --prefix=${HOME}/${ARCH} $HOSTARG
  - make install
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - CPPFLAGS=-I${HOME}/${ARCH}/include LDFLAGS="-L${HOME}/${ARCH}/lib -Wl,-Bstatic,-lsodium -Wl,-Bdynamic" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/lib ./configure --with-libsodium --prefix=${HOME}/${ARCH} CXXFLAGS="-fPIC"
+ - CPPFLAGS=-I${HOME}/${ARCH}/include LDFLAGS="-L${HOME}/${ARCH}/lib -Wl,-Bstatic,-lsodium -Wl,-Bdynamic" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/lib ./configure --with-libsodium --prefix=${HOME}/${ARCH} CXXFLAGS="-fPIC" $HOSTARG
  - make install
  - cd ..
  - cd jzmq/jzmq-jni
