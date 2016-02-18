@@ -34,7 +34,7 @@ script:
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - ./configure --with-libsodium LDFLAGS="$LDFLAGS -Wl,Bstatic,-lsodium -Wl,-Bdynamic" CXXFLAGS="$CXXFLAGS -fPIC"
+ - ./configure --with-libsodium LDFLAGS="$LDFLAGS -Wl,-Bstatic,-lsodium -Wl,-Bdynamic" CXXFLAGS="$CXXFLAGS -fPIC"
  - make
  - sudo make install
  - sudo ldconfig
