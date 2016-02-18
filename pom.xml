@@ -61,6 +61,7 @@
                         </goals>
                         <configuration>
                             <skipCache>true</skipCache>
+                            <overwrite>true</overwrite>
                             <url>${urlroot}/x86_64/libjzmq.so</url>
                             <outputDirectory>${libdir}/NATIVE/amd64/Linux</outputDirectory>
                         </configuration>
