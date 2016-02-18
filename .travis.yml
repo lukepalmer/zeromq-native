@@ -36,7 +36,7 @@ script:
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include" LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib -lrt -lpthread" ./configure --prefix=${HOME}/${ARCH} --enable-self-contained
+ - CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include" LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib -lrt -lpthread" ./configure --prefix=${HOME}/${ARCH} --enable-self-contained $HOSTBUILD
  - make install
  - cd
  - cp ${HOME}/${ARCH}/lib/libjzmq.so.0.0.0 libjzmq.so
