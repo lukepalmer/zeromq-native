@@ -1,0 +1,72 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.lukepalmer</groupId>
+    <artifactId>zeromq-native</artifactId>
+    <version>4.1.4</version>
+    <packaging>jar</packaging>
+
+    <name>zeromq-native</name>
+    <description>Native libraries for ZeroMQ</description>
+    <url>https://github.com/lukepalmer/zeromq-native</url>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License (GPL)</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/lukepalmer/zeromq-native</url>
+    </scm>
+
+    <properties>
+        <zeromq-version>4.1.4</zeromq-version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <libdir>${project.build.directory}/zeromq-native/</libdir>
+        <urlroot>https://s3.amazonaws.com/zeromq/${zeromq-version}</urlroot>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zeromq</groupId>
+            <artifactId>jzmq</artifactId>
+            <version>3.1.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>${libdir}</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>x86_64</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <skipCache>true</skipCache>
+                            <url>${urlroot}/x86_64/libjzmq.so</url>
+                            <outputDirectory>${libdir}/NATIVE/amd64/Linux</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
