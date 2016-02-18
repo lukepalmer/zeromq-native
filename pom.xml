@@ -66,6 +66,19 @@
                             <outputDirectory>${libdir}/NATIVE/amd64/Linux</outputDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>i686</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <skipCache>true</skipCache>
+                            <overwrite>true</overwrite>
+                            <url>${urlroot}/i686/libjzmq.so</url>
+                            <outputDirectory>${libdir}/NATIVE/i386/Linux</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
