@@ -13,7 +13,7 @@ This package is the result of a repeatable travis build that can be upgraded via
 Hopefully this gives it some longevity as well as gives people confidence in using binaries from a 3rd party.
 
 ##What is implemented
-*Linux 64 bit
-*Linux 32 bit
+* Linux 64 bit
+* Linux 32 bit
 
 In the future I plan to add OS X and possibly Windows.
