@@ -41,7 +41,7 @@ script:
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - ./configure --enable-self-contained LDFLAGS="$LDFLAGS -lrt -lpthread"
+ - LDFLAGS="$LDFLAGS -lrt -lpthread" ./configure --enable-self-contained
  - make
  - sudo make install
  - cd
