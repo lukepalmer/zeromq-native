@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.lukepalmer</groupId>
     <artifactId>zeromq-native</artifactId>
-    <version>4.1.4</version>
+    <version>4.1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>zeromq-native</name>
@@ -18,6 +18,13 @@
     <scm>
         <url>https://github.com/lukepalmer/zeromq-native.git</url>
     </scm>
+
+    <developers>
+        <developer>
+            <name>Luke Palmer</name>
+            <url>https://github.com/lukepalmer</url>
+        </developer>
+    </developers>
 
     <properties>
         <zeromq-version>4.1.4</zeromq-version>
@@ -38,9 +45,14 @@
             <groupId>org.zeromq</groupId>
             <artifactId>jzmq</artifactId>
             <version>3.1.0</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
     <build>
         <resources>
             <resource>
@@ -80,6 +92,31 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.6</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>

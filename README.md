@@ -16,4 +16,13 @@ Hopefully this gives it some longevity as well as gives people confidence in usi
 * Linux 64 bit
 * Linux 32 bit
 
-In the future I plan to add OS X and possibly Windows.
+OS X will likely come soon. Windows probably not in the near future because of a bug in glib2 for mingw.
+
+#Using 
+    <dependency>
+        <groupId>net.lukepalmer</groupId>
+        <artifactId>zeromq-native</artifactId>
+        <version>4.1.4-SNAPSHOT</version>
+    </dependency>
+
+And then you should have working [jzmq bindings](https://github.com/zeromq/jzmq).
