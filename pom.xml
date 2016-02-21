@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.lukepalmer</groupId>
     <artifactId>zeromq-native</artifactId>
-    <version>4.1.4-SNAPSHOT</version>
+    <version>${zeromq-version}-1</version>
     <packaging>jar</packaging>
 
     <name>zeromq-native</name>
@@ -116,7 +116,7 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>

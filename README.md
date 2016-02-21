@@ -22,7 +22,7 @@ OS X will likely come soon. Windows probably not in the near future because it's
     <dependency>
         <groupId>net.lukepalmer</groupId>
         <artifactId>zeromq-native</artifactId>
-        <version>4.1.4-SNAPSHOT</version>
+        <version>4.1.4-1</version>
     </dependency>
     <dependency>
         <groupId>org.zeromq</groupId>
