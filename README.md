@@ -16,7 +16,7 @@ Hopefully this gives it some longevity as well as gives people confidence in usi
 * Linux 64 bit
 * Linux 32 bit
 
-OS X will likely come soon. Windows probably not in the near future because of a bug in glib2 for mingw.
+OS X will likely come soon. Windows probably not in the near future because it's not yet supported in travis (which is the whole point of how this package works).
 
 #Using 
     <dependency>
@@ -24,5 +24,10 @@ OS X will likely come soon. Windows probably not in the near future because of a
         <artifactId>zeromq-native</artifactId>
         <version>4.1.4-SNAPSHOT</version>
     </dependency>
-
+    <dependency>
+        <groupId>org.zeromq</groupId>
+        <artifactId>jzmq</artifactId>
+        <version>3.1.0</version>
+    </dependency>
+    
 And then you should have working [jzmq bindings](https://github.com/zeromq/jzmq).

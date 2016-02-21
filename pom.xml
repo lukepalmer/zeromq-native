@@ -45,6 +45,7 @@
             <groupId>org.zeromq</groupId>
             <artifactId>jzmq</artifactId>
             <version>3.1.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <distributionManagement>

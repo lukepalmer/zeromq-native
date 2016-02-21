@@ -16,7 +16,7 @@ matrix:
   fast_finish: true
 before_install:
  - sudo apt-get update -y
- - sudo apt-get install libpgm-dev gcc-multilib g++-multilib mingw32 mingw-w64 -y
+ - sudo apt-get install libpgm-dev gcc-multilib g++-multilib -y
 install:
  - git clone https://github.com/zeromq/jzmq.git
  - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
