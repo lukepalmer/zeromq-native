@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.lukepalmer</groupId>
     <artifactId>zeromq-native</artifactId>
-    <version>${zeromq-version}-2-SNAPSHOT</version>
+    <version>${zeromq-version}-3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>zeromq-native</name>
@@ -61,6 +61,20 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>resources</id>
+                        <!-- resource copy must come after the download and prior to packaging -->
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
                 <artifactId>download-maven-plugin</artifactId>

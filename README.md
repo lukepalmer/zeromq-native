@@ -22,7 +22,7 @@ OS X will likely come soon. Windows probably not in the near future because it's
     <dependency>
         <groupId>net.lukepalmer</groupId>
         <artifactId>zeromq-native</artifactId>
-        <version>4.1.4-1</version>
+        <version>4.1.4-2</version>
     </dependency>
     <dependency>
         <groupId>org.zeromq</groupId>
@@ -31,3 +31,11 @@ OS X will likely come soon. Windows probably not in the near future because it's
     </dependency>
     
 And then you should have working [jzmq bindings](https://github.com/zeromq/jzmq).
+
+#Deploying
+
+Steps to build from scratch and deploy to maven central
+1. set version number
+1. mvn clean package -DskipTests
+1. mvn test
+1. mvn deploy
