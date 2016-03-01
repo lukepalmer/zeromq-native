@@ -64,5 +64,3 @@ after_build:
   - cmd: copy libzmq*.dll libzmq.dll
   - cmd: 7z a -y -bd -mx=9 libzmq.zip libzmq.dll libsodium.dll
   - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:Platform}-${env:Configuration}-${env:ZMQ_VERSION}.zip"
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
