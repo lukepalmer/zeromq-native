@@ -54,7 +54,7 @@ build:
   verbosity: minimal
 
 after_build:
-  - cmd: cd %LIBZMQ_BUILDDIR%\zeromq-%ZMQ_VERSION%\bin\%Configuration%"
+  - cmd: cd "%LIBZMQ_BUILDDIR%\bin\%Configuration%"
   - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
   - cmd: 7z a -y -bd -mx=9 libzmq.zip *.dll
   - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:Platform}-${env:Configuration}.zip"
