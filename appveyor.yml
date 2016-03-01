@@ -57,7 +57,7 @@ after_build:
   - cmd: cd c:\projects
   - cmd: git clone --depth 1 --quiet https://github.com/zeromq/jzmq.git
   - cmd: set LIBJZMQDIR=C:\projects\jzmq\jzmq-jni
-  - cmd: cd "%LIBJZMQDIR"
+  - cmd: cd "%LIBJZMQDIR%"
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBJZMQDIR%\builds\msvc\jzmq\jzmq.vcxproj
   - cmd: cd "%LIBZMQ_BUILDDIR%\bin\%Configuration%"
   - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
