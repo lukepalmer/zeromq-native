@@ -81,7 +81,7 @@
                 <version>1.2.1</version>
                 <executions>
                     <execution>
-                        <id>x86_64</id>
+                        <id>Linux-x86_64</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>wget</goal>
@@ -89,12 +89,13 @@
                         <configuration>
                             <skipCache>true</skipCache>
                             <overwrite>true</overwrite>
-                            <url>${urlroot}/x86_64/libjzmq.so</url>
+                            <url>${urlroot}/i686/zeromq-native.zip</url>
+                            <unpack>true</unpack>
                             <outputDirectory>${libdir}/NATIVE/amd64/Linux</outputDirectory>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>i686</id>
+                        <id>Linux-i686</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>wget</goal>
@@ -102,10 +103,26 @@
                         <configuration>
                             <skipCache>true</skipCache>
                             <overwrite>true</overwrite>
-                            <url>${urlroot}/i686/libjzmq.so</url>
+                            <url>${urlroot}/i686/zeromq-native.zip</url>
+                            <unpack>true</unpack>
                             <outputDirectory>${libdir}/NATIVE/i386/Linux</outputDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>Windows-x86</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <skipCache>true</skipCache>
+                            <overwrite>true</overwrite>
+                            <url>https://ci.appveyor.com/api/buildjobs/w7ix3btm3nbxqtyq/artifacts/zeromq-native-Win32-Release-4.1.4.zip</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${libdir}/NATIVE/x86/Windows</outputDirectory>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
             <plugin>
