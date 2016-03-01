@@ -32,7 +32,7 @@ script:
  - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - ./configure --with-libsodium --prefix=${HOME}/${ARCH} $HOSTBUILD
+ - LDFLAGS="$LDFLAGS -lsodium" sodium_CFLAGS=${HOME}/${ARCH}/include sodium_LIBS=${HOME}/${ARCH}/libs ./configure --with-libsodium --prefix=${HOME}/${ARCH} $HOSTBUILD
  - make V=1 install
  - cd ..
  - cd jzmq/jzmq-jni
