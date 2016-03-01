@@ -8,7 +8,7 @@ env:
       LDFLAGS=-m32
       HOSTBUILD="--host=i686-pc-linux-gnu --build=x86_64-pc-linux-gnu"
   global:
-    - ZMQ_VERSION=4.1.4
+    - ZMQ_VERSION=4.1.5
 language: cpp
 sudo: required
 dist: trusty
@@ -18,25 +18,35 @@ before_install:
  - sudo apt-get update -y
  - sudo apt-get install libpgm-dev gcc-multilib g++-multilib -y
 install:
+ - git clone -b stable git://github.com/jedisct1/libsodium.git
  - git clone https://github.com/zeromq/jzmq.git
  - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
  - tar xzvf zeromq-${ZMQ_VERSION}.tar.gz
 script:
+ - export CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include"
+ - export LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib"
+ - cd libsodium
+ - ./autogen.sh
+ - ./configure --prefix=${HOME}/${ARCH} $HOSTBUILD
+ - make install
+ - cd ..
  - cd zeromq-${ZMQ_VERSION}
  - ./autogen.sh
- - CXXFLAGS="$CXXFLAGS -fPIC" ./configure --without-libsodium --prefix=${HOME}/${ARCH} $HOSTBUILD
+ - ./configure --with-libsodium --prefix=${HOME}/${ARCH} $HOSTBUILD
  - make V=1 install
  - cd ..
  - cd jzmq/jzmq-jni
  - ./autogen.sh
- - CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include" LDFLAGS="$LDFLAGS -L${HOME}/${ARCH}/lib -lrt -lpthread" ./configure --prefix=${HOME}/${ARCH} --enable-self-contained $HOSTBUILD
+ - ./configure --prefix=${HOME}/${ARCH} $HOSTBUILD
  - make install
  - cd
- - cp ${HOME}/${ARCH}/lib/libjzmq.so.0.0.0 libjzmq.so
+ - cd ${HOME}/${ARCH}
+ - zip ${HOME}/zeromq-native.zip libjzmq.so libzmq.so libsodium.so
+ - cd
 addons:
   artifacts:
     debug: true
     paths:
-     - libjzmq.so
+     - zeromq-native.zip
     target_paths: ${ZMQ_VERSION}/${ARCH}
     permissions: public-read
