@@ -40,8 +40,6 @@ install:
   - cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\src\libsodium\include"
   - cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
 
-clone_folder: C:\projects\libzmq
-
 before_build:
   - cmd: cd c:\projects
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq
