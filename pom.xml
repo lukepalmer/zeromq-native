@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.lukepalmer</groupId>
     <artifactId>zeromq-native</artifactId>
-    <version>${zeromq-version}-1-SNAPSHOT</version>
+    <version>${zeromq-version}-3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>zeromq-native</name>
@@ -27,7 +27,7 @@
     </developers>
 
     <properties>
-        <zeromq-version>4.1.5</zeromq-version>
+        <zeromq-version>4.1.4</zeromq-version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <libdir>${project.build.directory}/zeromq-native/</libdir>
