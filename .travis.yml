@@ -40,7 +40,7 @@ script:
  - ./configure --prefix=${HOME}/${ARCH} $HOSTBUILD
  - make install
  - cd
- - cd ${HOME}/${ARCH}
+ - cd ${HOME}/${ARCH}/lib
  - zip ${HOME}/zeromq-native.zip libjzmq.so libzmq.so libsodium.so
  - cd
 addons:
