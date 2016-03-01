@@ -46,7 +46,7 @@ before_build:
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: cd c:\projects
   - cmd: git clone --depth 1 --quiet "https://github.com/zeromq/libzmq.git"
-  - cmd cd "%LIBZMQ_BUILDDIR%"
+  - cmd: cd "%LIBZMQ_BUILDDIR%"
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D WITH_SODIUM="%WITH_SODIUM%" -D WITH_TWEETNACL="%WITH_TWEETNACL%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM="%WITH_SODIUM%" -G "%CMAKE_GENERATOR%" c:\projects\libzmq
 build:
   parallel: true
