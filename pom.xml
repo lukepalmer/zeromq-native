@@ -27,7 +27,7 @@
     </developers>
 
     <properties>
-        <zeromq-version>4.1.4</zeromq-version>
+        <zeromq-version>4.1.5</zeromq-version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <libdir>${project.build.directory}/zeromq-native/</libdir>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -117,7 +117,7 @@
                         <configuration>
                             <skipCache>true</skipCache>
                             <overwrite>true</overwrite>
-                            <url>https://ci.appveyor.com/api/buildjobs/w7ix3btm3nbxqtyq/artifacts/zeromq-native-Win32-Release-4.1.4.zip</url>
+                            <url>https://ci.appveyor.com/api/buildjobs/w7ix3btm3nbxqtyq/artifacts/zeromq-native-Win32-Release-${zeromq-version}}.zip</url>
                             <unpack>true</unpack>
                             <outputDirectory>${libdir}/NATIVE/x86/Windows</outputDirectory>
                         </configuration>

@@ -8,7 +8,7 @@ env:
       LDFLAGS=-m32
       HOSTBUILD="--host=i686-pc-linux-gnu --build=x86_64-pc-linux-gnu"
   global:
-    - ZMQ_VERSION=4.1.4
+    - ZMQ_VERSION=4.1.5
 language: cpp
 sudo: required
 dist: trusty
@@ -20,7 +20,7 @@ before_install:
 install:
  - git clone -b stable --depth 1 --quiet git://github.com/jedisct1/libsodium.git
  - git clone --depth 1 --quiet https://github.com/zeromq/jzmq.git
- - wget http://download.zeromq.org/zeromq-${ZMQ_VERSION}.tar.gz
+ - wget https://github.com/zeromq/zeromq4-1/releases/download/v4.1.5/zeromq-${ZMQ_VERSION}.tar.gz
  - tar xzvf zeromq-${ZMQ_VERSION}.tar.gz
 script:
  - export CPPFLAGS="$CPPFLAGS -I${HOME}/${ARCH}/include"
