@@ -49,7 +49,7 @@ before_build:
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D WITH_SODIUM="%WITH_SODIUM%" -D WITH_TWEETNACL="%WITH_TWEETNACL%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM="%WITH_SODIUM%" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
 build:
   parallel: true
-  project: C:\projects\libzmq_build\ZeroMQ.sln
+  project: C:\projects\libzmq\ZeroMQ.sln
   verbosity: minimal
 
 after_build:
