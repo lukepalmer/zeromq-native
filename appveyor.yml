@@ -46,7 +46,7 @@ before_build:
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: git clone --depth 1 --quiet "https://github.com/zeromq/libzmq.git" %LIBZMQ_BUILDDIR%-src
   - cd "%LIBZMQ_BUILDDIR%"
-  - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D WITH_SODIUM="%WITH_SODIUM%" -D WITH_TWEETNACL="%WITH_TWEETNACL%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM="%WITH_SODIUM%" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
+  - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D WITH_SODIUM="%WITH_SODIUM%" -D WITH_TWEETNACL="%WITH_TWEETNACL%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
 build:
   parallel: true
   project: C:\projects\libzmq\ZeroMQ.sln
@@ -54,10 +54,12 @@ build:
 
 after_build:
   - cmd: cd c:\projects
-  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/jzmq.git
-  - cmd: set LIBJZMQDIR=C:\projects\jzmq\jzmq-jni
+  - cmd: set LIBJZMQDIR=C:\projects\jzmq
+  - cmd: git clone --depth 1 --quiet https://github.com/lukepalmer/jzmq.git %LIBJZMQDIR%-src
+  - cmd: md "%LIBJZMQDIR%"
   - cmd: cd "%LIBJZMQDIR%"
-  - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %LIBJZMQDIR%\builds\msvc\jzmq\jzmq.vcxproj
+  - cmd cmake -G $env:CMAKE_GENERATOR -DLIBZMQ_INCLUDE_DIR=%LIBZMQ_BUILDDIR%-src/include -DLIBZMQ_LINK_DIR=%LIBZMQ_BUILDDIR%/lib/%Configuration% %LIBJZMQDIR%-src/jzmq-jni
+  - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %LIBJZMQDIR%/JZMQ.sln
   - cmd: cd "%LIBZMQ_BUILDDIR%\bin\%Configuration%"
   - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
   - cmd: copy libzmq*.dll libzmq.dll
