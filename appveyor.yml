@@ -53,6 +53,8 @@ build:
   verbosity: minimal
 
 after_build:
+  - cmd: cd "%LIBZMQ_BUILDDIR%/lib/%Configuration%"
+  - cmd: copy libzmq*.dll libzmq.dll
   - cmd: cd c:\projects
   - cmd: set LIBJZMQDIR=C:\projects\jzmq
   - cmd: git clone --depth 1 --quiet https://github.com/lukepalmer/jzmq.git %LIBJZMQDIR%-src
@@ -62,6 +64,5 @@ after_build:
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %LIBJZMQDIR%/JZMQ.sln
   - cmd: cd "%LIBZMQ_BUILDDIR%\bin\%Configuration%"
   - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
-  - cmd: copy libzmq*.dll libzmq.dll
   - cmd: 7z a -y -bd -mx=9 libzmq.zip libzmq.dll libsodium.dll
   - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:Platform}-${env:Configuration}-${env:ZMQ_VERSION}.zip"
