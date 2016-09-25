@@ -23,7 +23,7 @@ matrix:
 init:
   - cmake --version
   - msbuild /version
-  - cmd: reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 install:
   - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
@@ -62,3 +62,6 @@ after_build:
   - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
   - cmd: 7z a -y -bd -mx=9 libzmq.zip libzmq.dll libsodium.dll
   - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:Platform}-${env:Configuration}-${env:ZMQ_VERSION}.zip"
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
