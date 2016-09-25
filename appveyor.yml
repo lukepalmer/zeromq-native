@@ -23,7 +23,6 @@ matrix:
 init:
   - cmake --version
   - msbuild /version
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 install:
   - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
@@ -49,7 +48,9 @@ build:
   verbosity: minimal
 
 after_build:
-  - cmd: copy "%LIBZMQ_BUILDDIR%\bin\%Configuration%\libzmq*.dll" "%LIBZMQ_BUILDDIR%\lib\%Configuration%\libzmq.dll"
+  - cmd: cd "%LIBZMQ_BUILDDIR%\lib\%Configuration%"
+  - cmd: copy %LIBZMQ_BUILDDIR%\bin\%Configuration%\libzmq-v*.dll libzmq.dll
+  - cmd: copy libzmq-v*.lib libzmq.lib
   - cmd: set LIBJZMQDIR=C:\projects\jzmq
   - cmd: git clone --depth 1 --quiet https://github.com/lukepalmer/jzmq.git %LIBJZMQDIR%-src
   - cmd: md "%LIBJZMQDIR%"
