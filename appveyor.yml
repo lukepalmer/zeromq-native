@@ -11,6 +11,8 @@ environment:
   MSVCVERSION: "v140"
   MSVCYEAR: "vs2015"
   ZMQ_VERSION: "4.1.5"
+  WITH_SODIUM: ON
+  WITH_TWEETNACL: OFF
   matrix:
     - platform: Win32
       configuration: Release
@@ -42,7 +44,7 @@ before_build:
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: git clone --depth 1 --quiet "https://github.com/zeromq/libzmq.git" %LIBZMQ_BUILDDIR%-src
   - cd "%LIBZMQ_BUILDDIR%"
-  - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
+  - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D WITH_SODIUM="%WITH_SODIUM%" -D WITH_TWEETNACL="%WITH_TWEETNACL%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM="%WITH_SODIUM%" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
 build:
   parallel: true
   project: C:\projects\libzmq\ZeroMQ.sln
