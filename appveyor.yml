@@ -59,6 +59,3 @@ after_build:
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %LIBJZMQDIR%/JZMQ.sln
   - cmd: 7z a -y -bd -mx=9 libzmq.zip "%LIBZMQ_BUILDDIR%\lib\%Configuration%\libzmq.dll" "%SODIUM_LIBRARY_DIR%\libsodium.dll" "%LIBJZMQDIR%\lib\%Configuration%\libjzmq.dll"
   - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:Platform}-${env:Configuration}-${env:ZMQ_VERSION}.zip"
-
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
