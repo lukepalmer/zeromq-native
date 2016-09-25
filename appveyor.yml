@@ -58,7 +58,7 @@ after_build:
   - cmd: git clone --depth 1 --quiet https://github.com/lukepalmer/jzmq.git %LIBJZMQDIR%-src
   - cmd: md "%LIBJZMQDIR%"
   - cmd: cd "%LIBJZMQDIR%"
-  - cmd cmake -G %CMAKE_GENERATOR% -DLIBZMQ_INCLUDE_DIR=%LIBZMQ_BUILDDIR%-src/include -DLIBZMQ_LINK_DIR=%LIBZMQ_BUILDDIR%/lib/%Configuration% %LIBJZMQDIR%-src/jzmq-jni
+  - cmd: cmake -G %CMAKE_GENERATOR% -DLIBZMQ_INCLUDE_DIR=%LIBZMQ_BUILDDIR%-src/include -DLIBZMQ_LINK_DIR=%LIBZMQ_BUILDDIR%/lib/%Configuration% %LIBJZMQDIR%-src/jzmq-jni
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %LIBJZMQDIR%/JZMQ.sln
   - cmd: cd "%LIBZMQ_BUILDDIR%\bin\%Configuration%"
   - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
