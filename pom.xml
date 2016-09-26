@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.lukepalmer</groupId>
     <artifactId>zeromq-native</artifactId>
-    <version>${zeromq-version}-3-SNAPSHOT</version>
+    <version>${zeromq-version}-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>zeromq-native</name>
@@ -117,7 +117,7 @@
                         <configuration>
                             <skipCache>true</skipCache>
                             <overwrite>true</overwrite>
-                            <url>https://ci.appveyor.com/api/buildjobs/w7ix3btm3nbxqtyq/artifacts/zeromq-native-Win32-Release-${zeromq-version}}.zip</url>
+                            <url>https://ci.appveyor.com/api/projects/lukepalmer/zeromq-native/artifacts/bin/zeromq-native-${zeromq-version}.zip?branch=master&job=Environment%3A%20platform%3DWin32%2C%20configuration%3DRelease</url>
                             <unpack>true</unpack>
                             <outputDirectory>${libdir}/NATIVE/x86/Windows</outputDirectory>
                         </configuration>

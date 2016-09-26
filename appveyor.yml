@@ -58,4 +58,4 @@ after_build:
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DLIBZMQ_INCLUDE_DIR="%LIBZMQ_BUILDDIR%-src/include" -DLIBZMQ_LINK_DIR="%LIBZMQ_BUILDDIR%/lib/%Configuration%" "%LIBJZMQDIR%-src/jzmq-jni"
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %LIBJZMQDIR%/JZMQ.sln
   - cmd: 7z a -y -bd -mx=9 libzmq.zip "%LIBZMQ_BUILDDIR%\lib\%Configuration%\libzmq.dll" "%SODIUM_LIBRARY_DIR%\libsodium.dll" "%LIBJZMQDIR%\lib\%Configuration%\libjzmq.dll"
-  - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:Platform}-${env:Configuration}-${env:ZMQ_VERSION}.zip"
+  - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:ZMQ_VERSION}.zip"
