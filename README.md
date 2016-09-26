@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/lukepalmer/zeromq-native.svg?branch=master)](https://travis-ci.org/lukepalmer/zeromq-native)
+[![Build status](https://ci.appveyor.com/api/projects/status/k05i2gt0iw7l3djc/branch/master?svg=true)](https://ci.appveyor.com/project/lukepalmer/zeromq-native/branch/master)
+
 # zeromq-native
 Native ZeroMQ libraries that work out-of-the-box in java.
 
