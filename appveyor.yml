@@ -39,7 +39,7 @@ before_build:
   - cmd: cd c:\projects
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq
   - cmd: md "%LIBZMQ_BUILDDIR%"
-  - cmd: git clone --depth 1 --quiet "https://github.com/zeromq/libzmq.git" %LIBZMQ_BUILDDIR%-src
+  - cmd: git clone --quiet "https://github.com/zeromq/libzmq.git" %LIBZMQ_BUILDDIR%-src
   - cd "%LIBZMQ_BUILDDIR%-src"
   - cmd: git checkout 2bc979665185ad6162677d246205853aa540fbc6 # libzmq HEAD is broken
   - cd "%LIBZMQ_BUILDDIR%"
