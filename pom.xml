@@ -42,9 +42,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.zeromq</groupId>
+            <groupId>net.lukepalmer</groupId>
             <artifactId>jzmq</artifactId>
-            <version>3.1.0</version>
+            <version>3.1.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -89,7 +89,7 @@
                         <configuration>
                             <skipCache>true</skipCache>
                             <overwrite>true</overwrite>
-                            <url>${urlroot}/i686/zeromq-native.zip</url>
+                            <url>${urlroot}/x86_64/zeromq-native.zip</url>
                             <unpack>true</unpack>
                             <outputDirectory>${libdir}/NATIVE/amd64/Linux</outputDirectory>
                         </configuration>
@@ -117,12 +117,27 @@
                         <configuration>
                             <skipCache>true</skipCache>
                             <overwrite>true</overwrite>
-                            <url>https://ci.appveyor.com/api/projects/lukepalmer/zeromq-native/artifacts/bin/zeromq-native-${zeromq-version}.zip?branch=master&job=Environment%3A%20platform%3DWin32%2C%20configuration%3DRelease</url>
+                            <url>https://ci.appveyor.com/api/projects/lukepalmer/zeromq-native/artifacts/zeromq-native-${zeromq-version}.zip?branch=master&amp;job=Environment%3A%20platform%3DWin32%2C%20configuration%3DRelease</url>
+                            <outputFileName>zeromq-native-${zeromq-version}.zip</outputFileName>
                             <unpack>true</unpack>
-                            <outputDirectory>${libdir}/NATIVE/x86/Windows</outputDirectory>
+                            <outputDirectory>${libdir}/NATIVE/i386/Windows</outputDirectory>
                         </configuration>
                     </execution>
-
+                    <execution>
+                    <id>Windows-x86_64</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <skipCache>true</skipCache>
+                            <overwrite>true</overwrite>
+                            <url>https://ci.appveyor.com/api/projects/lukepalmer/zeromq-native/artifacts/zeromq-native-${zeromq-version}.zip?branch=master&amp;job=Environment%3A%20platform%3Dx64%2C%20configuration%3DRelease</url>
+                            <outputFileName>zeromq-native-${zeromq-version}.zip</outputFileName>
+                            <unpack>true</unpack>
+                            <outputDirectory>${libdir}/NATIVE/amd64/Windows</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>

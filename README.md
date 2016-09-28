@@ -18,19 +18,23 @@ Hopefully this gives it some longevity as well as gives people confidence in usi
 ##What is implemented
 * Linux 64 bit
 * Linux 32 bit
+* Windows 64 bit
+* Windows 32 bit
 
-OS X will likely come soon. Windows probably not in the near future because it's not yet supported in travis (which is the whole point of how this package works).
+OS X should be possible in Travis, particularly if anyone familiar with that ecosystem would like to contribute.
+
+Note that only a SNAPSHOT version is available at the moment as windows builds of JZMQ are not sane in released versions.
 
 #Using 
     <dependency>
         <groupId>net.lukepalmer</groupId>
         <artifactId>zeromq-native</artifactId>
-        <version>4.1.4-2</version>
+        <version>4.1.5-SNAPSHOT</version>
     </dependency>
     <dependency>
-        <groupId>org.zeromq</groupId>
+        <groupId>net.lukepalmer</groupId>
         <artifactId>jzmq</artifactId>
-        <version>3.1.0</version>
+        <version>3.1.1-SNAPSHOT</version>
     </dependency>
     
 And then you should have working [jzmq bindings](https://github.com/zeromq/jzmq).
@@ -39,6 +43,6 @@ And then you should have working [jzmq bindings](https://github.com/zeromq/jzmq)
 
 Steps to build from scratch and deploy to maven central
 1. set version number
-1. mvn clean package -DskipTests
-1. mvn test
-1. mvn deploy
+2. mvn clean package -DskipTests
+3. mvn test
+4. mvn deploy
