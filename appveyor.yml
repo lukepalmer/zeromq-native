@@ -41,7 +41,7 @@ before_build:
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: git clone --quiet "https://github.com/zeromq/libzmq.git" %LIBZMQ_BUILDDIR%-src
   - cd "%LIBZMQ_BUILDDIR%-src"
-  - cmd: git checkout 2bc979665185ad6162677d246205853aa540fbc6 # libzmq HEAD is broken
+  - cmd: git checkout 113d3ffc0b55ea3adba30db7f6bd67e35289e257 # libzmq HEAD is broken
   - cd "%LIBZMQ_BUILDDIR%"
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
 build:
