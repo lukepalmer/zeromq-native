@@ -41,7 +41,6 @@ before_build:
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: git clone --quiet "https://github.com/zeromq/libzmq.git" %LIBZMQ_BUILDDIR%-src
   - cd "%LIBZMQ_BUILDDIR%-src"
-  - cmd: git checkout 113d3ffc0b55ea3adba30db7f6bd67e35289e257 # libzmq HEAD is broken
   - cd "%LIBZMQ_BUILDDIR%"
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
 build:
@@ -61,3 +60,13 @@ after_build:
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %LIBJZMQDIR%/JZMQ.sln
   - cmd: 7z a -y -bd -mx=9 libzmq.zip "%LIBZMQ_BUILDDIR%\lib\%Configuration%\libzmq.dll" "%SODIUM_LIBRARY_DIR%\libsodium.dll" "%LIBJZMQDIR%\lib\%Configuration%\libjzmq.dll"
   - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "zeromq-native-${env:ZMQ_VERSION}.zip"
+  - ps: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          if (!(Test-Path -Path "C:\maven" )) {
+            (new-object System.Net.WebClient).DownloadFile('https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.3.9/apache-maven-3.3.9-bin.zip', 'C:\maven-bin.zip')
+            [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
+          }
+  - cmd: SET PATH=C:\maven\apache-maven-3.3.9\bin;%JAVA_HOME%\bin;%PATH%
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%
+  - cmd: mvn install -DskipTests
+  - cmd: mvn test
