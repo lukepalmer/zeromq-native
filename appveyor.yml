@@ -68,5 +68,6 @@ after_build:
           }
   - cmd: SET PATH=C:\maven\apache-maven-3.3.9\bin;%JAVA_HOME%\bin;%PATH%
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
+  - ps: .\maven-enable-snapshots.ps1
   - cmd: mvn install -DskipTests
   - cmd: mvn test
