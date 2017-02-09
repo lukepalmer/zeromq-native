@@ -50,7 +50,8 @@ build:
 
 after_build:
   - ps: mv $env:LIBZMQ_BUILDDIR\bin\$env:Configuration\libzmq-v*.dll libzmq.dll
-  - ps: mv $env:LIBZMQ_BUILDDIR\lib\$env:Configuration\libzmq-$env:MSVCVERSION-mt-4*.lib libzmq.lib
+  - cd "%LIBZMQ_BUILDDIR%\lib\%Configuration%"
+  - ps: mv libzmq-$env:MSVCVERSION-mt-4*.lib libzmq.lib
   - cmd: set LIBJZMQDIR=C:\projects\jzmq
   - cmd: git clone --depth 1 --quiet https://github.com/lukepalmer/jzmq.git %LIBJZMQDIR%-src
   - cmd: md "%LIBJZMQDIR%"
