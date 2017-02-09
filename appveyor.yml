@@ -48,7 +48,8 @@ build:
   verbosity: minimal
 
 after_build:
-  - ps: mv $env:LIBZMQ_BUILDDIR\bin\$env:Configuration\libzmq-v*.dll libzmq.dll
+  - cd "%LIBZMQ_BUILDDIR%\bin\%Configuration%"
+  - ps: mv libzmq-v*.dll libzmq.dll
   - cd "%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - ps: mv libzmq-$env:MSVCVERSION-mt-4*.lib libzmq.lib
   - cmd: set LIBJZMQDIR=C:\projects\jzmq
