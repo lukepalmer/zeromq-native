@@ -40,7 +40,6 @@ before_build:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: git clone --quiet "https://github.com/zeromq/libzmq.git" %LIBZMQ_BUILDDIR%-src
-  - cd "%LIBZMQ_BUILDDIR%-src"
   - cd "%LIBZMQ_BUILDDIR%"
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_BUILDDIR%-src
 build:
@@ -49,7 +48,6 @@ build:
   verbosity: minimal
 
 after_build:
-  - cmd: cd "%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - ps: mv $env:LIBZMQ_BUILDDIR\bin\$env:Configuration\libzmq-v*.dll libzmq.dll
   - cmd: set LIBJZMQDIR=C:\projects\jzmq
   - cmd: git clone --depth 1 --quiet https://github.com/lukepalmer/jzmq.git %LIBJZMQDIR%-src
