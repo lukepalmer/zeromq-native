@@ -8,7 +8,7 @@ env:
       LDFLAGS=-m32
       HOSTBUILD="--host=i686-pc-linux-gnu --build=x86_64-pc-linux-gnu"
   global:
-    - ZMQ_VERSION=4.1.5
+    - ZMQ_VERSION=4.2.1
 language: cpp
 sudo: required
 dist: trusty
